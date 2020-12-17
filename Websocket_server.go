@@ -8,11 +8,13 @@ import (
 )
 
 func main() {
+
 	// Upgrader specifies parameters for upgrading an HTTP connection to a
 	// WebSocket connection.
 	upgrader := &websocket.Upgrader{}
 
 	http.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
+		//upgrader.CheckOrigin = func(r *http.Request) bool { fmt.Println(r); return true }  //警告: 跨域測試時才可解除註解
 		c, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			log.Println("upgrade:", err)
